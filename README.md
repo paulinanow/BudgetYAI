@@ -112,17 +112,27 @@ Your CSV file should include these columns:
 
 | Column | Description | Example |
 |--------|-------------|---------|
-| Date | Transaction date | 2024-01-01 |
+| Date | Transaction date | 01/01/2024 (DD/MM/YYYY) |
 | Description | Transaction details | Grocery Store |
 | Amount | Transaction amount | -45.67 (negative for expenses) |
 | Category | Optional category | Food & Dining |
 
+### Supported Date Formats
+The application supports multiple date formats for international compatibility:
+
+- **European Format**: `DD/MM/YYYY` (e.g., 31/12/2024)
+- **European with dashes**: `DD-MM-YYYY` (e.g., 31-12-2024)
+- **European with dots**: `DD.MM.YYYY` (e.g., 31.12.2024)
+- **ISO Format**: `YYYY-MM-DD` (e.g., 2024-12-31)
+- **US Format**: `MM/DD/YYYY` (e.g., 12/31/2024)
+- **Short European**: `DD/MM/YY` (e.g., 31/12/24)
+
 ### Sample CSV Structure
 ```csv
 Date,Description,Amount,Category
-2024-01-01,Grocery Store,-45.67,Food & Dining
-2024-01-02,Salary Deposit,2500.00,Income
-2024-01-03,Gas Station,-32.50,Transportation
+01/01/2024,Grocery Store,-45.67,Food & Dining
+02/01/2024,Salary Deposit,2500.00,Income
+03/01/2024,Gas Station,-32.50,Transportation
 ```
 
 ## 🎯 Usage Guide

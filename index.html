@@ -105,13 +105,18 @@
                     </div>
 
                     <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                        <h3 class="font-medium text-blue-900 mb-2">Expected CSV Format:</h3>
+                        <h3 class="font-medium text-blue-900 mb-2">Supported CSV Formats:</h3>
                         <ul class="text-sm text-blue-800 space-y-1">
-                            <li>• Date column (YYYY-MM-DD format)</li>
-                            <li>• Description column (transaction details)</li>
-                            <li>• Amount column (positive for income, negative for expenses)</li>
-                            <li>• Optional: Category column (will be enhanced by AI)</li>
+                            <li>• <strong>Date formats:</strong> DD/MM/YYYY, DD-MM-YYYY, DD.MM.YYYY, YYYY-MM-DD, MM/DD/YYYY</li>
+                            <li>• <strong>Description column:</strong> Transaction details</li>
+                            <li>• <strong>Amount column:</strong> Positive for income, negative for expenses</li>
+                            <li>• <strong>Optional:</strong> Category column (will be enhanced by AI)</li>
                         </ul>
+                        <div class="mt-3 p-2 bg-white rounded border border-blue-100">
+                            <p class="text-xs text-blue-700">
+                                <strong>Examples:</strong> 31/12/2024, 15-03-2024, 2024-12-31, 12/31/2024
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -310,10 +315,7 @@
                     }
                     
                     if (standardizedRow.date) {
-                        const date = new Date(standardizedRow.date);
-                        if (!isNaN(date.getTime())) {
-                            standardizedRow.date = date.toISOString().split('T')[0];
-                        }
+                        standardizedRow.date = parseDate(standardizedRow.date);
                     }
                     
                     if (standardizedRow.amount) {
@@ -333,6 +335,99 @@
                     !isNaN(row.amount) && 
                     row.amount !== 0
                 );
+        }
+
+        // Enhanced date parsing function to support multiple formats
+        function parseDate(dateString) {
+            if (!dateString) return null;
+            
+            const dateStr = dateString.toString().trim();
+            
+            // Try different date formats
+            const formats = [
+                // DD/MM/YYYY (European format)
+                /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/,  // 31/12/2024
+                /^(\d{1,2})-(\d{1,2})-(\d{4})$/,    // 31-12-2024
+                /^(\d{1,2})\.(\d{1,2})\.(\d{4})$/,  // 31.12.2024
+                
+                // YYYY-MM-DD (ISO format)
+                /^(\d{4})-(\d{1,2})-(\d{1,2})$/,    // 2024-12-31
+                
+                // MM/DD/YYYY (US format)
+                /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/,  // 12/31/2024
+                /^(\d{1,2})-(\d{1,2})-(\d{4})$/,    // 12-31-2024
+                
+                // DD/MM/YY (European short format)
+                /^(\d{1,2})\/(\d{1,2})\/(\d{2})$/,  // 31/12/24
+                /^(\d{1,2})-(\d{1,2})-(\d{2})$/,    // 31-12-24
+            ];
+            
+            for (let i = 0; i < formats.length; i++) {
+                const match = dateStr.match(formats[i]);
+                if (match) {
+                    let day, month, year;
+                    
+                    if (i < 3) {
+                        // DD/MM/YYYY format (European)
+                        day = parseInt(match[1], 10);
+                        month = parseInt(match[2], 10);
+                        year = parseInt(match[3], 10);
+                    } else if (i === 3) {
+                        // YYYY-MM-DD format (ISO)
+                        year = parseInt(match[1], 10);
+                        month = parseInt(match[2], 10);
+                        day = parseInt(match[3], 10);
+                    } else if (i >= 4 && i <= 5) {
+                        // MM/DD/YYYY format (US) - but we need to detect if it's actually DD/MM
+                        const firstPart = parseInt(match[1], 10);
+                        const secondPart = parseInt(match[2], 10);
+                        
+                        // If first part > 12, it's likely DD/MM format
+                        if (firstPart > 12) {
+                            day = firstPart;
+                            month = secondPart;
+                        } else if (secondPart > 12) {
+                            // If second part > 12, it's likely MM/DD format
+                            month = firstPart;
+                            day = secondPart;
+                        } else {
+                            // Ambiguous case - assume DD/MM for European users
+                            day = firstPart;
+                            month = secondPart;
+                        }
+                        year = parseInt(match[3], 10);
+                    } else if (i >= 6) {
+                        // DD/MM/YY format (European short)
+                        day = parseInt(match[1], 10);
+                        month = parseInt(match[2], 10);
+                        year = parseInt(match[3], 10);
+                        
+                        // Convert 2-digit year to 4-digit
+                        if (year < 50) {
+                            year += 2000;
+                        } else {
+                            year += 1900;
+                        }
+                    }
+                    
+                    // Validate the date
+                    if (day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= 2100) {
+                        const date = new Date(year, month - 1, day);
+                        if (date.getDate() === day && date.getMonth() === month - 1 && date.getFullYear() === year) {
+                            return date.toISOString().split('T')[0]; // Return YYYY-MM-DD format
+                        }
+                    }
+                }
+            }
+            
+            // Fallback: try JavaScript's native Date parsing
+            const fallbackDate = new Date(dateStr);
+            if (!isNaN(fallbackDate.getTime())) {
+                return fallbackDate.toISOString().split('T')[0];
+            }
+            
+            console.warn(`Could not parse date: ${dateString}`);
+            return null;
         }
 
         // AI categorization (simulated)
@@ -777,16 +872,16 @@
 
         function downloadSampleCSV() {
             const sampleData = [
-                { Date: '2024-01-01', Description: 'Grocery Store', Amount: '-45.67', Category: 'Food & Dining' },
-                { Date: '2024-01-02', Description: 'Gas Station', Amount: '-32.50', Category: 'Transportation' },
-                { Date: '2024-01-03', Description: 'Salary Deposit', Amount: '2500.00', Category: 'Income' },
-                { Date: '2024-01-04', Description: 'Netflix Subscription', Amount: '-15.99', Category: 'Entertainment' },
-                { Date: '2024-01-05', Description: 'Restaurant', Amount: '-67.89', Category: 'Food & Dining' },
-                { Date: '2024-01-06', Description: 'Electric Bill', Amount: '-89.45', Category: 'Utilities' },
-                { Date: '2024-01-07', Description: 'Amazon Purchase', Amount: '-23.99', Category: 'Shopping' },
-                { Date: '2024-01-08', Description: 'Gas Station', Amount: '-28.75', Category: 'Transportation' },
-                { Date: '2024-01-09', Description: 'Coffee Shop', Amount: '-4.50', Category: 'Food & Dining' },
-                { Date: '2024-01-10', Description: 'Movie Theater', Amount: '-12.99', Category: 'Entertainment' }
+                { Date: '01/01/2024', Description: 'Grocery Store', Amount: '-45.67', Category: 'Food & Dining' },
+                { Date: '02/01/2024', Description: 'Gas Station', Amount: '-32.50', Category: 'Transportation' },
+                { Date: '03/01/2024', Description: 'Salary Deposit', Amount: '2500.00', Category: 'Income' },
+                { Date: '04/01/2024', Description: 'Netflix Subscription', Amount: '-15.99', Category: 'Entertainment' },
+                { Date: '05/01/2024', Description: 'Restaurant', Amount: '-67.89', Category: 'Food & Dining' },
+                { Date: '06/01/2024', Description: 'Electric Bill', Amount: '-89.45', Category: 'Utilities' },
+                { Date: '07/01/2024', Description: 'Amazon Purchase', Amount: '-23.99', Category: 'Shopping' },
+                { Date: '08/01/2024', Description: 'Gas Station', Amount: '-28.75', Category: 'Transportation' },
+                { Date: '09/01/2024', Description: 'Coffee Shop', Amount: '-4.50', Category: 'Food & Dining' },
+                { Date: '10/01/2024', Description: 'Movie Theater', Amount: '-12.99', Category: 'Entertainment' }
             ];
             
             const csv = Papa.unparse(sampleData);
@@ -794,7 +889,7 @@
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'sample-transactions.csv';
+            a.download = 'sample-transactions-european-format.csv';
             a.click();
             window.URL.revokeObjectURL(url);
         }
