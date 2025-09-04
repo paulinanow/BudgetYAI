@@ -114,7 +114,7 @@ Your CSV file should include these columns:
 |--------|-------------|---------|
 | Date | Transaction date | 01/01/2024 (DD/MM/YYYY) |
 | Description | Transaction details | Grocery Store |
-| Amount | Transaction amount | -45.67 (negative for expenses) |
+| Amount | Transaction amount | £45.67, €123.45, $89.99 |
 | Category | Optional category | Food & Dining |
 
 ### Supported Date Formats
@@ -127,12 +127,30 @@ The application supports multiple date formats for international compatibility:
 - **US Format**: `MM/DD/YYYY` (e.g., 12/31/2024)
 - **Short European**: `DD/MM/YY` (e.g., 31/12/24)
 
+### Supported Currencies
+The application automatically recognizes and processes multiple currencies:
+
+- **British Pound**: `£` (GBP) - e.g., £45.67, -£25.00
+- **Euro**: `€` (EUR) - e.g., €123.45, +€500.00
+- **US Dollar**: `$` (USD) - e.g., $89.99, -$15.50
+- **Polish Złoty**: `zł` (PLN) - e.g., zł45.50, -zł120.75
+
+**Currency Features:**
+- Automatic symbol detection (beginning or end of amount)
+- European number format support (1.234,56)
+- Mixed currency support in the same file
+- Proper negative/positive amount handling
+
 ### Sample CSV Structure
 ```csv
 Date,Description,Amount,Category
-01/01/2024,Grocery Store,-45.67,Food & Dining
-02/01/2024,Salary Deposit,2500.00,Income
-03/01/2024,Gas Station,-32.50,Transportation
+01/01/2024,Grocery Store,£45.67,Food & Dining
+02/01/2024,Salary Deposit,$2500.00,Income
+03/01/2024,Gas Station,€32.50,Transportation
+04/01/2024,Netflix Subscription,-£15.99,Entertainment
+05/01/2024,Restaurant,-€67.89,Food & Dining
+06/01/2024,Polish Restaurant,-zł45.50,Food & Dining
+07/01/2024,Salary PLN,zł3500.00,Income
 ```
 
 ## 🎯 Usage Guide
