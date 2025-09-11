@@ -12,7 +12,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <!-- Header -->
+        <!-- Header -->
     <header class="bg-white shadow-sm border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-6">
@@ -21,18 +21,18 @@
                     <span class="ml-3 px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full">
                         AI-Powered
                     </span>
-                </div>
+                        </div>
                 <div class="text-sm text-gray-500">
                     <span class="font-medium">Privacy First:</span> All data processed locally
+                        </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- Main Content -->
+        <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Welcome Section -->
-        <div class="text-center mb-8">
+                <div class="text-center mb-8">
             <h2 class="text-2xl font-semibold text-gray-900 mb-4">
                 Upload Your Bank Statement & Get AI Insights
             </h2>
@@ -40,7 +40,7 @@
                 Simply upload your CSV file and let our AI analyze your spending patterns, 
                 categorize transactions, and provide personalized budget recommendations.
             </p>
-        </div>
+                </div>
 
         <!-- Upload Section -->
         <div class="bg-white rounded-lg shadow-sm border p-8 mb-8">
@@ -61,11 +61,21 @@
                 </div>
 
                 <!-- Sample CSV Download -->
-                <div class="mt-6">
-                    <a href="data:text/csv;charset=utf-8,Date,Description,Amount,Currency%0A2025-01-01,Starbucks,-5.25,USD%0A2025-01-02,Salary,2500,USD%0A2025-01-03,Uber,-12.5,USD%0A2025-01-04,Grocery Store,-45.80,USD%0A2025-01-05,Gas Station,-32.15,USD%0A2025-01-06,Netflix,-15.99,USD%0A2025-01-07,Restaurant,-28.50,USD%0A2025-01-08,ATM Withdrawal,-100,USD%0A2025-01-09,Online Shopping,-67.25,USD%0A2025-01-10,Salary,2500,USD" 
-                       download="sample-transactions.csv" 
+                <div class="mt-6 space-x-4">
+                    <a href="data:text/csv;charset=utf-8,Date,Description,Amount%0A2025-01-01,Starbucks,-$5.25%0A2025-01-02,Salary,$2500%0A2025-01-03,Uber,-$12.50%0A2025-01-04,Grocery Store,-$45.80%0A2025-01-05,Gas Station,-$32.15%0A2025-01-06,Netflix,-$15.99%0A2025-01-07,Restaurant,-$28.50%0A2025-01-08,ATM Withdrawal,-$100%0A2025-01-09,Online Shopping,-$67.25%0A2025-01-10,Salary,$2500" 
+                       download="sample-usd.csv" 
                        class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
-                        ⬇️ Download Sample CSV
+                        ⬇️ Sample USD CSV
+                    </a>
+                    <a href="data:text/csv;charset=utf-8,Date,Description,Amount%0A2025-01-01,Kawiarnia,-zł15.50%0A2025-01-02,Wypłata,zł3500%0A2025-01-03,Uber,-zł25.00%0A2025-01-04,Sklep spożywczy,-zł120.80%0A2025-01-05,Stacja benzynowa,-zł85.15%0A2025-01-06,Netflix,-zł45.99%0A2025-01-07,Restauracja,-zł78.50%0A2025-01-08,Wypłata z bankomatu,-zł200%0A2025-01-09,Zakupy online,-zł150.25%0A2025-01-10,Wypłata,zł3500" 
+                       download="sample-pln.csv" 
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        ⬇️ Sample PLN CSV
+                    </a>
+                    <a href="data:text/csv;charset=utf-8,Date,Description,Amount%0A2025-01-01,Coffee Shop,-£4.25%0A2025-01-02,Salary,£2200%0A2025-01-03,Taxi,-£15.50%0A2025-01-04,Supermarket,-£38.80%0A2025-01-05,Petrol Station,-£28.15%0A2025-01-06,Streaming,-£12.99%0A2025-01-07,Restaurant,-£24.50%0A2025-01-08,Cash Withdrawal,-£80%0A2025-01-09,Online Shopping,-£55.25%0A2025-01-10,Salary,£2200" 
+                       download="sample-gbp.csv" 
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                        ⬇️ Sample GBP CSV
                     </a>
                 </div>
 
@@ -73,7 +83,7 @@
                 <div id="uploadStatus" class="mt-4 text-sm text-gray-600 hidden"></div>
                 <div id="errorMessage" class="mt-4 text-sm text-red-600 hidden"></div>
             </div>
-        </div>
+                    </div>
 
         <!-- Dashboard Content (Hidden initially) -->
         <div id="dashboardContent" class="hidden">
@@ -91,7 +101,7 @@
                             <p class="text-2xl font-semibold text-gray-900" id="totalIncome">$0</p>
                         </div>
                     </div>
-                </div>
+                    </div>
 
                 <div class="bg-white rounded-lg shadow-sm border p-6">
                     <div class="flex items-center">
@@ -105,7 +115,7 @@
                             <p class="text-2xl font-semibold text-gray-900" id="totalExpenses">$0</p>
                         </div>
                     </div>
-                </div>
+                    </div>
 
                 <div class="bg-white rounded-lg shadow-sm border p-6">
                     <div class="flex items-center">
@@ -119,7 +129,7 @@
                             <p class="text-2xl font-semibold text-gray-900" id="netBalance">$0</p>
                         </div>
                     </div>
-                </div>
+                    </div>
 
                 <div class="bg-white rounded-lg shadow-sm border p-6">
                     <div class="flex items-center">
@@ -143,13 +153,13 @@
                     <h3 class="text-lg font-medium text-gray-900 mb-4">Spending by Category</h3>
                     <div id="categoryChart" class="h-64"></div>
                 </div>
-
+                
                 <!-- Monthly Trend -->
                 <div class="bg-white rounded-lg shadow-sm border p-6">
                     <h3 class="text-lg font-medium text-gray-900 mb-4">Monthly Spending Trend</h3>
                     <div id="trendChart" class="h-64"></div>
                 </div>
-            </div>
+                </div>
 
             <!-- AI Recommendations -->
             <div class="bg-white rounded-lg shadow-sm border p-6 mb-8">
@@ -163,30 +173,30 @@
                         <h4 class="font-medium text-green-900 mb-2">Savings Opportunities</h4>
                         <p class="text-green-800 text-sm" id="savingsOpportunities">AI will identify potential savings based on your spending patterns.</p>
                     </div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Recent Transactions -->
+                <!-- Recent Transactions -->
             <div class="bg-white rounded-lg shadow-sm border p-6">
                 <h3 class="text-lg font-medium text-gray-900 mb-4">Recent Transactions</h3>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
-                            </tr>
-                        </thead>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                </tr>
+                            </thead>
                         <tbody id="transactionsTable" class="bg-white divide-y divide-gray-200">
                             <!-- Transactions will be populated here -->
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-    </main>
+        </main>
 
     <script>
         // Global variables
@@ -231,7 +241,7 @@
         function parseCSV(file) {
             showStatus('Processing CSV file...');
             hideError();
-
+            
             Papa.parse(file, {
                 header: true,
                 skipEmptyLines: true,
@@ -240,7 +250,7 @@
                         showError('Error parsing CSV: ' + results.errors[0].message);
                         return;
                     }
-
+                    
                     const data = results.data;
                     if (data.length === 0) {
                         showError('No data found in CSV file');
@@ -259,14 +269,18 @@
 
         function processTransactions(data) {
             transactions = data.map(row => {
-                const amount = parseFloat(row.Amount) || 0;
+                const amountStr = String(row.Amount || '');
+                const amount = parseFloat(amountStr.replace(/[^\d.-]/g, '')) || 0;
                 const date = new Date(row.Date);
+                
+                // Detect currency from amount field or Currency column
+                let currency = row.Currency || detectCurrencyFromAmount(amountStr);
                 
                 return {
                     date: date,
                     description: row.Description || '',
                     amount: amount,
-                    currency: row.Currency || 'USD',
+                    currency: currency,
                     category: categorizeTransaction(row.Description || '', amount)
                 };
             });
@@ -277,6 +291,99 @@
             // Show dashboard
             dashboardContent.classList.remove('hidden');
             updateDashboard();
+        }
+
+        function detectCurrencyFromAmount(amountStr) {
+            const str = String(amountStr).toUpperCase();
+            
+            // Major currencies
+            if (str.includes('$') || str.includes('USD')) return 'USD';
+            if (str.includes('€') || str.includes('EUR')) return 'EUR';
+            if (str.includes('£') || str.includes('GBP')) return 'GBP';
+            if (str.includes('ZŁ') || str.includes('PLN')) return 'PLN';
+            if (str.includes('C$') || str.includes('CAD')) return 'CAD';
+            if (str.includes('A$') || str.includes('AUD')) return 'AUD';
+            if (str.includes('¥') || str.includes('JPY')) return 'JPY';
+            if (str.includes('CHF')) return 'CHF';
+            
+            // Nordic currencies
+            if (str.includes('KR') || str.includes('SEK')) return 'SEK';
+            if (str.includes('NOK')) return 'NOK';
+            if (str.includes('DKK')) return 'DKK';
+            if (str.includes('ISK')) return 'ISK';
+            
+            // Eastern European currencies
+            if (str.includes('CZK') || str.includes('KČ')) return 'CZK';
+            if (str.includes('HUF') || str.includes('FT')) return 'HUF';
+            if (str.includes('RON') || str.includes('LEI')) return 'RON';
+            if (str.includes('BGN') || str.includes('ЛВ')) return 'BGN';
+            if (str.includes('HRK') || str.includes('KN')) return 'HRK';
+            if (str.includes('RSD') || str.includes('ДИН')) return 'RSD';
+            if (str.includes('UAH') || str.includes('₴')) return 'UAH';
+            if (str.includes('RUB') || str.includes('₽')) return 'RUB';
+            if (str.includes('BYN') || str.includes('РУБ')) return 'BYN';
+            
+            // Asian currencies
+            if (str.includes('CNY') || str.includes('¥') || str.includes('元')) return 'CNY';
+            if (str.includes('KRW') || str.includes('₩')) return 'KRW';
+            if (str.includes('THB') || str.includes('฿')) return 'THB';
+            if (str.includes('SGD')) return 'SGD';
+            if (str.includes('HKD') || str.includes('HK$')) return 'HKD';
+            if (str.includes('TWD') || str.includes('NT$')) return 'TWD';
+            if (str.includes('MYR') || str.includes('RM')) return 'MYR';
+            if (str.includes('IDR') || str.includes('RP')) return 'IDR';
+            if (str.includes('PHP') || str.includes('₱')) return 'PHP';
+            if (str.includes('VND') || str.includes('₫')) return 'VND';
+            if (str.includes('INR') || str.includes('₹')) return 'INR';
+            if (str.includes('PKR')) return 'PKR';
+            if (str.includes('BDT') || str.includes('৳')) return 'BDT';
+            if (str.includes('LKR') || str.includes('₨')) return 'LKR';
+            
+            // Middle Eastern & African currencies
+            if (str.includes('AED') || str.includes('د.إ')) return 'AED';
+            if (str.includes('SAR') || str.includes('ر.س')) return 'SAR';
+            if (str.includes('QAR') || str.includes('ر.ق')) return 'QAR';
+            if (str.includes('KWD') || str.includes('د.ك')) return 'KWD';
+            if (str.includes('BHD') || str.includes('د.ب')) return 'BHD';
+            if (str.includes('OMR') || str.includes('ر.ع')) return 'OMR';
+            if (str.includes('JOD') || str.includes('د.ا')) return 'JOD';
+            if (str.includes('ILS') || str.includes('₪')) return 'ILS';
+            if (str.includes('TRY') || str.includes('₺')) return 'TRY';
+            if (str.includes('EGP') || str.includes('£')) return 'EGP';
+            if (str.includes('ZAR') || str.includes('R')) return 'ZAR';
+            if (str.includes('NGN') || str.includes('₦')) return 'NGN';
+            if (str.includes('KES') || str.includes('KSH')) return 'KES';
+            if (str.includes('GHS') || str.includes('₵')) return 'GHS';
+            if (str.includes('MAD') || str.includes('د.م')) return 'MAD';
+            if (str.includes('TND') || str.includes('د.ت')) return 'TND';
+            
+            // Latin American currencies
+            if (str.includes('MXN') || str.includes('$')) return 'MXN';
+            if (str.includes('BRL') || str.includes('R$')) return 'BRL';
+            if (str.includes('ARS') || str.includes('$')) return 'ARS';
+            if (str.includes('CLP') || str.includes('$')) return 'CLP';
+            if (str.includes('COP') || str.includes('$')) return 'COP';
+            if (str.includes('PEN') || str.includes('S/')) return 'PEN';
+            if (str.includes('UYU') || str.includes('$U')) return 'UYU';
+            if (str.includes('VES') || str.includes('BS')) return 'VES';
+            
+            // Other currencies
+            if (str.includes('NZD') || str.includes('NZ$')) return 'NZD';
+            if (str.includes('ZAR') || str.includes('R')) return 'ZAR';
+            if (str.includes('NOK') || str.includes('KR')) return 'NOK';
+            if (str.includes('DKK') || str.includes('KR')) return 'DKK';
+            if (str.includes('SEK') || str.includes('KR')) return 'SEK';
+            if (str.includes('CZK') || str.includes('KČ')) return 'CZK';
+            if (str.includes('HUF') || str.includes('FT')) return 'HUF';
+            if (str.includes('RON') || str.includes('LEI')) return 'RON';
+            if (str.includes('BGN') || str.includes('ЛВ')) return 'BGN';
+            if (str.includes('HRK') || str.includes('KN')) return 'HRK';
+            if (str.includes('RSD') || str.includes('ДИН')) return 'RSD';
+            if (str.includes('UAH') || str.includes('₴')) return 'UAH';
+            if (str.includes('RUB') || str.includes('₽')) return 'RUB';
+            if (str.includes('BYN') || str.includes('РУБ')) return 'BYN';
+            
+            return 'USD'; // Default fallback
         }
 
         function categorizeTransaction(description, amount) {
@@ -308,11 +415,20 @@
             const income = transactions.filter(t => t.amount > 0).reduce((sum, t) => sum + t.amount, 0);
             const expenses = Math.abs(transactions.filter(t => t.amount < 0).reduce((sum, t) => sum + t.amount, 0));
             
+            // Detect primary currency (most common currency in transactions)
+            const currencyCounts = {};
+            transactions.forEach(t => {
+                currencyCounts[t.currency] = (currencyCounts[t.currency] || 0) + 1;
+            });
+            const primaryCurrency = Object.keys(currencyCounts).reduce((a, b) => 
+                currencyCounts[a] > currencyCounts[b] ? a : b, 'USD');
+            
             budgetMetrics = {
                 totalIncome: income,
                 totalExpenses: expenses,
                 netBalance: income - expenses,
-                transactionCount: transactions.length
+                transactionCount: transactions.length,
+                primaryCurrency: primaryCurrency
             };
 
             // Calculate category spending
@@ -324,9 +440,9 @@
 
         function updateDashboard() {
             // Update summary cards
-            document.getElementById('totalIncome').textContent = formatCurrency(budgetMetrics.totalIncome);
-            document.getElementById('totalExpenses').textContent = formatCurrency(budgetMetrics.totalExpenses);
-            document.getElementById('netBalance').textContent = formatCurrency(budgetMetrics.netBalance);
+            document.getElementById('totalIncome').textContent = formatCurrency(budgetMetrics.totalIncome, budgetMetrics.primaryCurrency);
+            document.getElementById('totalExpenses').textContent = formatCurrency(budgetMetrics.totalExpenses, budgetMetrics.primaryCurrency);
+            document.getElementById('netBalance').textContent = formatCurrency(budgetMetrics.netBalance, budgetMetrics.primaryCurrency);
             document.getElementById('transactionCount').textContent = budgetMetrics.transactionCount;
 
             // Update charts
@@ -353,7 +469,7 @@
                 bar.innerHTML = `
                     <div class="flex justify-between text-sm mb-1">
                         <span>${item.name}</span>
-                        <span>${formatCurrency(item.value)}</span>
+                        <span>${formatCurrency(item.value, budgetMetrics.primaryCurrency)}</span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2">
                         <div class="bg-blue-600 h-2 rounded-full" style="width: ${percentage}%"></div>
@@ -381,12 +497,12 @@
                 bar.innerHTML = `
                     <div class="flex justify-between text-sm mb-1">
                         <span>${month}</span>
-                        <span>${formatCurrency(amount)}</span>
+                        <span>${formatCurrency(amount, budgetMetrics.primaryCurrency)}</span>
                     </div>
                     <div class="w-full bg-gray-200 rounded-full h-2">
                         <div class="bg-green-600 h-2 rounded-full" style="width: ${(amount / Math.max(...Object.values(monthlyData))) * 100}%"></div>
-                    </div>
-                `;
+                </div>
+            `;
                 chartContainer.appendChild(bar);
             });
         }
@@ -406,7 +522,7 @@
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm ${transaction.amount > 0 ? 'text-green-600' : 'text-red-600'}">
-                        ${formatCurrency(transaction.amount)}
+                        ${formatCurrency(transaction.amount, transaction.currency)}
                     </td>
                 `;
                 tableBody.appendChild(row);
@@ -421,14 +537,14 @@
 
             const ruleAnalysis = `
                 Based on the 50/30/20 rule, your ideal budget should be:
-                • Needs (50%): ${formatCurrency(needs)}
-                • Wants (30%): ${formatCurrency(wants)}
-                • Savings (20%): ${formatCurrency(savings)}
+                • Needs (50%): ${formatCurrency(needs, budgetMetrics.primaryCurrency)}
+                • Wants (30%): ${formatCurrency(wants, budgetMetrics.primaryCurrency)}
+                • Savings (20%): ${formatCurrency(savings, budgetMetrics.primaryCurrency)}
                 
-                Your current spending: ${formatCurrency(budgetMetrics.totalExpenses)}
+                Your current spending: ${formatCurrency(budgetMetrics.totalExpenses, budgetMetrics.primaryCurrency)}
                 ${budgetMetrics.netBalance > 0 ? 
-                    `✅ You're saving ${formatCurrency(budgetMetrics.netBalance)} per month!` : 
-                    `⚠️ You're spending ${formatCurrency(Math.abs(budgetMetrics.netBalance))} more than you earn.`
+                    `✅ You're saving ${formatCurrency(budgetMetrics.netBalance, budgetMetrics.primaryCurrency)} per month!` : 
+                    `⚠️ You're spending ${formatCurrency(Math.abs(budgetMetrics.netBalance), budgetMetrics.primaryCurrency)} more than you earn.`
                 }
             `;
 
@@ -437,7 +553,7 @@
             // Savings Opportunities
             const topCategory = Object.entries(categories).sort((a, b) => b[1] - a[1])[0];
             const savingsText = `
-                Your highest spending category is "${topCategory[0]}" at ${formatCurrency(topCategory[1])}.
+                Your highest spending category is "${topCategory[0]}" at ${formatCurrency(topCategory[1], budgetMetrics.primaryCurrency)}.
                 Consider reviewing this category for potential savings opportunities.
                 ${budgetMetrics.netBalance < 0 ? 'Focus on reducing expenses to achieve a positive balance.' : 'Great job maintaining a positive cash flow!'}
             `;
@@ -445,11 +561,88 @@
             document.getElementById('savingsOpportunities').textContent = savingsText;
         }
 
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD'
-            }).format(amount);
+        function getCurrencySymbol(currencyCode) {
+            const symbols = {
+                // Major currencies
+                'USD': '$',
+                'EUR': '€',
+                'GBP': '£',
+                'PLN': 'zł',
+                'CAD': 'C$',
+                'AUD': 'A$',
+                'JPY': '¥',
+                'CHF': 'CHF',
+                
+                // Nordic currencies
+                'SEK': 'kr',
+                'NOK': 'kr',
+                'DKK': 'kr',
+                'ISK': 'kr',
+                
+                // Eastern European currencies
+                'CZK': 'Kč',
+                'HUF': 'Ft',
+                'RON': 'lei',
+                'BGN': 'лв',
+                'HRK': 'kn',
+                'RSD': 'дин',
+                'UAH': '₴',
+                'RUB': '₽',
+                'BYN': 'Br',
+                
+                // Asian currencies
+                'CNY': '¥',
+                'KRW': '₩',
+                'THB': '฿',
+                'SGD': 'S$',
+                'HKD': 'HK$',
+                'TWD': 'NT$',
+                'MYR': 'RM',
+                'IDR': 'Rp',
+                'PHP': '₱',
+                'VND': '₫',
+                'INR': '₹',
+                'PKR': '₨',
+                'BDT': '৳',
+                'LKR': '₨',
+                
+                // Middle Eastern & African currencies
+                'AED': 'د.إ',
+                'SAR': 'ر.س',
+                'QAR': 'ر.ق',
+                'KWD': 'د.ك',
+                'BHD': 'د.ب',
+                'OMR': 'ر.ع',
+                'JOD': 'د.ا',
+                'ILS': '₪',
+                'TRY': '₺',
+                'EGP': '£',
+                'ZAR': 'R',
+                'NGN': '₦',
+                'KES': 'KSh',
+                'GHS': '₵',
+                'MAD': 'د.م',
+                'TND': 'د.ت',
+                
+                // Latin American currencies
+                'MXN': '$',
+                'BRL': 'R$',
+                'ARS': '$',
+                'CLP': '$',
+                'COP': '$',
+                'PEN': 'S/',
+                'UYU': '$U',
+                'VES': 'Bs',
+                
+                // Other currencies
+                'NZD': 'NZ$'
+            };
+            return symbols[currencyCode] || currencyCode;
+        }
+
+        function formatCurrency(amount, currencyCode = 'USD') {
+            const symbol = getCurrencySymbol(currencyCode);
+            return `${symbol}${Math.abs(amount).toFixed(2)}`;
         }
 
         function showStatus(message) {
