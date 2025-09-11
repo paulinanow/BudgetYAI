@@ -2,6 +2,8 @@
 
 BudgetYAI is a React-based web application designed as a personal finance dashboard that allows users to upload their bank statements (CSV), automatically categorizes transactions using AI, and provides actionable recommendations for budgeting and savings.
 
+[View BudgetYAI](https://paulinanow.github.io/BudgetYAI/)
+
 ## 🚀 Features
 
 ### 📊 **CSV Upload & Import**
